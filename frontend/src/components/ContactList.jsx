@@ -6,7 +6,8 @@ export default function ContactList({ setContacts, contacts }) {
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
 
-  const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "https://contact-management-system-dpkx.onrender.com";
+
 
   useEffect(() => {
     const fetchContacts = async () => {

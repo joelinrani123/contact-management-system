@@ -8,7 +8,8 @@ export default function ContactForm({ setContacts, contacts }) {
   const [phone, setPhone] = useState('');
   const [status, setStatus] = useState('Interested');
 
-  const API_URL = import.meta.env.VITE_API_URL; 
+const API_URL = "https://contact-management-system-dpkx.onrender.com";
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
