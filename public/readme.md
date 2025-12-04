@@ -47,3 +47,14 @@ npm install mongodb
 
 - import both files in the app.jsx
 
+# deployment
+
+
+Backend
+- To host the backend - Render
+create a new web service. Add a name . Root directory name = backend 
+Build comment = npm install
+Start comment = npm start
+
+Frontend
+- To host the frontend - Netlify

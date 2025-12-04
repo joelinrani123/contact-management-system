@@ -6,12 +6,14 @@ export default function ContactList({ setContacts, contacts }) {
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchContacts = async () => {
       setLoading(true);
       try {
         const query = `?status=${filter}&search=${search}`;
-        const fetchPromise = axios.get(`http://localhost:5000/contacts${query}`);
+        const fetchPromise = axios.get(`${API_URL}/contacts${query}`);
         const delay = new Promise((resolve) => setTimeout(resolve, 500));
         const [res] = await Promise.all([fetchPromise, delay]);
         setContacts(res.data);
@@ -26,7 +28,7 @@ export default function ContactList({ setContacts, contacts }) {
 
   const handleStatusChange = async (id, status) => {
     try {
-      const res = await axios.put(`http://localhost:5000/contacts/${id}`, { status });
+      const res = await axios.put(`${API_URL}/contacts/${id}`, { status });
       setContacts((prev) => prev.map((c) => (c._id === id ? res.data : c)));
     } catch (err) {
       console.log(err);
@@ -36,7 +38,7 @@ export default function ContactList({ setContacts, contacts }) {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete?")) {
       try {
-        await axios.delete(`http://localhost:5000/contacts/${id}`);
+        await axios.delete(`${API_URL}/contacts/${id}`);
         setContacts((prev) => prev.filter((c) => c._id !== id));
       } catch (err) {
         console.log(err);

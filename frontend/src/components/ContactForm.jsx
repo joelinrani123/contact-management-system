@@ -8,14 +8,17 @@ export default function ContactForm({ setContacts, contacts }) {
   const [phone, setPhone] = useState('');
   const [status, setStatus] = useState('Interested');
 
+  const API_URL = import.meta.env.VITE_API_URL; 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(!name || !email) return alert("Name and Email are required");
 
     try {
-      const res = await axios.post("http://localhost:5000/contacts", {
-        name, company, email, phone, status,
-      });
+     const res = await axios.post(`${API_URL}/contacts`, {  
+      name, company, email, phone, status,
+    });
+
       setContacts([res.data, ...contacts]);
       setName(""); setCompany(""); setEmail(""); setPhone(""); setStatus('Interested');
       alert("Form submitted successfully");
