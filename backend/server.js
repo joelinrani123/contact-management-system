@@ -4,31 +4,31 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import contactRoutes from './routes/contactRoutes.js';
 
-
 dotenv.config();
-const app=express();
+const app = express();
 const PORT = process.env.PORT || 5000;
 
-
+// Correct CORS
 app.use(cors({
-
-    origin: "https://contact-management-backend-1-3ic9.onrender.com", 
-    methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: [
+    "http://localhost:5173",
+    "https://contact-management-joelin.netlify.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
 }));
 
-
+// JSON parser
 app.use(express.json());
 
-app.use('/contacts',contactRoutes)
+// Routes
+app.use('/contacts', contactRoutes);
 
-
+// MongoDB connect
 mongoose.connect(process.env.MONGO_URI)
-.then(()=>{
+  .then(() => {
     console.log('MongoDB connected');
-    app.listen(PORT,()=>{
-        console.log(`Server running in port ${PORT}`)
-    })
-
-})
-.catch((err)=>console.log(err));
-
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch(err => console.error(err));

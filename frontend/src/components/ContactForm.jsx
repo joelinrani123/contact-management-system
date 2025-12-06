@@ -8,18 +8,14 @@ export default function ContactForm({ setContacts, contacts }) {
   const [phone, setPhone] = useState('');
   const [status, setStatus] = useState('Interested');
 
-const API_URL = "https://contact-management-system-dpkx.onrender.com";
- 
+  const API_URL = "https://contact-management-backend-1-3ic9.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(!name || !email) return alert("Name and Email are required");
 
     try {
-     const res = await axios.post(`${API_URL}/contacts`, {  
-      name, company, email, phone, status,
-    });
-
+      const res = await axios.post(`${API_URL}/contacts`, { name, company, email, phone, status });
       setContacts([res.data, ...contacts]);
       setName(""); setCompany(""); setEmail(""); setPhone(""); setStatus('Interested');
       alert("Form submitted successfully");
@@ -31,11 +27,11 @@ const API_URL = "https://contact-management-system-dpkx.onrender.com";
 
   return (
     <form onSubmit={handleSubmit} className="p-4 rounded" autoComplete="off">
-      <input type="text" placeholder="Name" className="form-control mb-3" style={{ backgroundColor: '#ffffffff' }} value={name} onChange={(e) => setName(e.target.value)} />
-      <input type="text" placeholder="Company" className="form-control mb-3" style={{ backgroundColor: '#ffffffff' }} value={company} onChange={(e) => setCompany(e.target.value)} />
-      <input type="email" placeholder="Email" className="form-control mb-3" style={{ backgroundColor: '#ffffffff' }} value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="tel" placeholder="Phone" className="form-control mb-3" style={{ backgroundColor: '#ffffffff' }} value={phone} onChange={(e) => setPhone(e.target.value)} />
-      <select className="form-select mb-3" style={{ backgroundColor: '#ffffffff' }} value={status} onChange={(e) => setStatus(e.target.value)} >
+      <input type="text" placeholder="Name" className="form-control mb-3" value={name} onChange={(e) => setName(e.target.value)} />
+      <input type="text" placeholder="Company" className="form-control mb-3" value={company} onChange={(e) => setCompany(e.target.value)} />
+      <input type="email" placeholder="Email" className="form-control mb-3" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <input type="tel" placeholder="Phone" className="form-control mb-3" value={phone} onChange={(e) => setPhone(e.target.value)} />
+      <select className="form-select mb-3" value={status} onChange={(e) => setStatus(e.target.value)}>
         <option value="Interested">Interested</option>
         <option value="Follow-up">Follow-up</option>
         <option value="Closed">Closed</option>
