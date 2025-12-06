@@ -3,7 +3,7 @@ import Contact from '../models/Contact.js';
 
 const router = express.Router();
 
-// CREATE CONTACT
+// create contacts
 router.post('/', async (req, res) => {
     try {
         const contact = new Contact(req.body);
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// GET CONTACTS (with filter + search)
+// get contacts
 router.get('/', async (req, res) => {
     try {
         const { status, search } = req.query;
@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// UPDATE CONTACT
+// update contacts
 router.put('/:id', async (req, res) => {
     try {
         const contact = await Contact.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -46,7 +46,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// DELETE CONTACT
+// delete contacts
 router.delete('/:id', async (req, res) => {
     try {
         await Contact.findByIdAndDelete(req.params.id);
